@@ -1,0 +1,28 @@
+다음 2개의 플러그인을 product의 pom파일에 추가한다.
+<plugin>
+	<groupId>org.eclipse.tycho</groupId>
+	<artifactId>tycho-p2-repository-plugin</artifactId>
+	<version>${tycho.version}</version>
+	<configuration>
+		<includeAllDependencies>true</includeAllDependencies>
+	</configuration>
+</plugin>
+<plugin>
+	<groupId>org.eclipse.tycho</groupId>
+	<artifactId>tycho-p2-director-plugin</artifactId>
+	<version>${tycho.version}</version>
+	<executions>
+		<execution>
+			<id>materialize-products</id>
+			<goals>
+				<goal>materialize-products</goal>
+			</goals>
+		</execution>
+		<execution>
+			<id>archive-products</id>
+			<goals>
+				<goal>archive-products</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
