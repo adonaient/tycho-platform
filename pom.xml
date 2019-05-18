@@ -1,0 +1,113 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.adonai</groupId>
+	<artifactId>tycho-platform</artifactId>
+	<version>0.0.1-ROOT</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>tycho-bundles</module>
+		<module>tycho-examples</module>
+		<module>tycho-features</module>
+		<module>tycho-releng</module>
+		<module>tycho-tests</module>
+	</modules>
+
+	<properties>
+		<tycho.version>1.4.0</tycho.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<eclipse-repo.url>http://download.eclipse.org/releases/2018-09</eclipse-repo.url>
+	</properties>
+	
+<!-- 	target definition을 사용안할 때 -->
+	<repositories>
+		<repository>
+			<id>eclipse-release</id>
+			<url>${eclipse-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+<!-- 	Repository에 업로드시 사용 -->
+<!-- 	<distributionManagement> -->
+<!-- 		<repository> -->
+<!-- 			<id>ftp-repository</id> -->
+<!-- 			<url>ftp://adonai.iptime.org/repository/</url> -->
+<!-- 		</repository> -->
+<!-- 	</distributionManagement> -->
+
+	<build>
+		<defaultGoal>clean verify</defaultGoal>
+		<extensions>
+<!-- 			Repository에 업로드시 사용 -->
+<!-- 			<extension> -->
+<!-- 				<groupId>org.apache.maven.wagon</groupId> -->
+<!-- 				<artifactId>wagon-ftp</artifactId> -->
+<!-- 				<version>3.3.2</version> -->
+<!-- 			</extension> -->
+		</extensions>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<!--마지막으로 변경한 스냅샷버전으로 사용가능 -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<id>package-feature</id>
+						<configuration>
+							<finalName>${project.artifactId}_${unqualifiedVersion}.${buildQualifier}</finalName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+<!-- target definition을 사용 -->
+<!-- 					<target> -->
+<!-- 						<artifact> -->
+<!-- 							<groupId>com.adonai.tycho.releng</groupId> -->
+<!-- 							<artifactId>com.adonai.tycho.releng.target</artifactId> -->
+<!-- 							<version>0.0.0-Target</version> -->
+<!-- 						</artifact> -->
+<!-- 					</target> -->
+					<environments>
+<!-- 						<environment> -->
+<!-- 							<os>linux</os> -->
+<!-- 							<ws>gtk</ws> -->
+<!-- 							<arch>x86_64</arch> -->
+<!-- 						</environment> -->
+<!-- 						<environment> -->
+<!-- 							<os>win32</os> -->
+<!-- 							<ws>win32</ws> -->
+<!-- 							<arch>x86_64</arch> -->
+<!-- 						</environment> -->
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+<!-- 						<environment> -->
+<!-- 							<os>macosx</os> -->
+<!-- 							<ws>cocoa</ws> -->
+<!-- 							<arch>x86_64</arch> -->
+<!-- 						</environment> -->
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
