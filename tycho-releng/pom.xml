@@ -11,7 +11,7 @@
   </parent>
   <modules>
   	<module>
-  		../../ebest-com4j-future/com.adonai.ebest.com4j.future.product
+  		../../com.adonai/ebest-com4j-future/com.adonai.ebest.com4j.future.product
   	</module>
   </modules>
 </project>
