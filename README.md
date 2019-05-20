@@ -1,4 +1,4 @@
-##다음 2개의 플러그인을 product의 pom파일에 추가한다.
+## 다음 2개의 플러그인을 product의 pom파일에 추가한다.
 ```
 <plugin>
 	<groupId>org.eclipse.tycho</groupId>
